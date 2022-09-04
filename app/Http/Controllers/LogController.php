@@ -15,8 +15,8 @@ class LogController extends Controller
     {
         $logs = Log::all();
 
-        $gewicht = Log::all()->pluck('gewicht');
-        $dates = Log::all()->pluck('toegevoegd');
+        $gewicht = $logs->pluck('gewicht');
+        $dates = $logs->pluck('toegevoegd');
 
         return view('dashboard', compact('logs', 'gewicht', 'dates'));
     }
@@ -45,5 +45,11 @@ class LogController extends Controller
 
 
         return redirect('/dashboard')->with('success','gewicht is toegevoegd!');
+    }
+
+    public function destroy(Log $log)
+    {
+        $log->delete();
+        return redirect('/dashboard')->with('success','Post deleted successfully!');
     }
 }

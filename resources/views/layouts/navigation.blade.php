@@ -9,10 +9,6 @@
                     <x-nav-link :href="route('dashboard')" :active="true">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <div></div><div></div>
-                    <x-nav-link :href="route('stats')">
-                        {{ __('Statistieken') }}
-                    </x-nav-link>
 {{--                    <x-nav-link :href="route('log')">--}}
 {{--                        {{ __('Gewicht toevoegen') }}--}}
 {{--                    </x-nav-link>--}}
@@ -35,8 +31,10 @@
                     </x-slot>
 
                     <x-slot name="content">
-
-                        <x-dropdown-link :href="route('profile')" :active="request()->routeIs('profile')">
+                        <x-dropdown-link :href="route('stats')">
+                            {{ __('Statistieken') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('profile')">
                             {{'Profiel'}}
                         </x-dropdown-link>
 
@@ -52,8 +50,8 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
-            </div>
 
+            </div>
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 focus:outline-none 0 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -68,24 +66,21 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-nav-link>
-        </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-gray-200">
-{{--            <div class="px-4">--}}
-{{--                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>--}}
-{{--                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>--}}
-{{--            </div>--}}
+        <div class="pt-0 pb-1 border-gray-200">
 
             <div class="mt-3 space-y-1">
                 <!-- Authentication -->
-                <x-dropdown-link :href="route('profile')" :active="request()->routeIs('profile')">
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{'Dashboard'}}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('profile')">
                     {{'Profiel'}}
-                </x-dropdown-link>
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('stats')">
+                    {{'Statistieken'}}
+                </x-responsive-nav-link>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

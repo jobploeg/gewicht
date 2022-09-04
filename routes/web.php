@@ -17,17 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-Route::get('/profile', function () {
-    return view('profile');
-})->middleware(['auth'])->name('profile');
 
-//LOG
-Route::middleware('auth')->name('dashboard')->group(function () {
-    Route::get('dashboard', [App\Http\Controllers\LogController::class, 'create']);
-    Route::post('dashboard', [App\Http\Controllers\LogController::class, 'store']);
-    Route::get('dashboard', [App\Http\Controllers\LogController::class, 'index']);
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [App\Http\Controllers\LogController::class, 'create'])->name('dashboard');
+
+    Route::delete('dashboard/{log}', [App\Http\Controllers\LogController::class, 'destroy'])->name('dashboard');
+
+    Route::post('dashboard', [App\Http\Controllers\LogController::class, 'store'])->name('dashboard');
+    Route::get('dashboard', [App\Http\Controllers\LogController::class, 'index'])->name('dashboard');
+    Route::get('stats', [App\Http\Controllers\ChartJSController::class, 'index'])->name('stats');
+
+    Route::post('profile', [App\Http\Controllers\ProfileController::class, 'upload'])->name('profile');
+    Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 });
 
-Route::middleware('auth')->name('stats')->group(function () {
-    Route::get('stats', [App\Http\Controllers\ChartJSController::class, 'index']);
-});

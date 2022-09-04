@@ -4,7 +4,7 @@
         <div class="mx-auto sm:px-6 lg:px-8 md:w-1/4 w-screen">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="POST" action="/log">
+                    <form method="POST" action="/dashboard">
                         @csrf
 
                         <div>
@@ -31,7 +31,7 @@
                             <h1 class="text-xl font-bold text-black text-center">Profiel beheren</h1>
                         </header>
                     </div>
-                    <x-button class="mx-5">
+                    <x-button class="">
                         <a href="/profile">
                             {{'Profiel beheren'}}
                         </a>
@@ -50,8 +50,7 @@
                             <th scope="col" class="px-6 py-3">Gewicht</th>
                             <th scope="col" class="px-6 py-3">BMI</th>
                             <th scope="col" class="px-6 py-3">Datum</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                            <th scope="col">Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,15 +65,15 @@
                                 <td class="px-6 py-4">
                                     {{ $log->created_at->format('m/d/Y') }}
                                 </td>
-                                {{--                                <td>--}}
-                                {{--                                    <form action="{{route('logs.destroy',$log->id)}}" method="post" class="d-inline">--}}
-                                {{--                                        {{ csrf_field() }}--}}
-                                {{--                                        @method('DELETE')--}}
-                                {{--                                        <button class="hover:underline m-1" style="font-weight: bold" type="submit">--}}
-                                {{--                                            <i class="material-icons text-gray-500">delete</i>--}}
-                                {{--                                        </button>--}}
-                                {{--                                    </form>--}}
-                                {{--                                </td>--}}
+                                <td>
+                                    <form action="dashboard/{{ $log->id }}" method="post" class="d-inline">
+                                        {{ csrf_field() }}
+                                        @method('DELETE')
+                                        <button class="hover:underline m-1" style="font-weight: bold" type="submit">
+                                            <i class="material-icons text-gray-500">delete</i>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -94,7 +93,7 @@
                     const date = {!! json_encode($dates) !!};
                 </script>
 
-                <canvas id="myChart" height="100px"></canvas>
+                    <canvas id="myChart" height="100px"></canvas>
 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -106,8 +105,8 @@
                         datasets: [
                             {
                                 label: 'gewicht',
-                                backgroundColor: 'rgb(201, 210, 253)',
-                                borderColor: 'rgb(201, 210, 253)',
+                                backgroundColor: 'rgb(252, 202, 204)',
+                                borderColor: 'rgb(252, 202, 204)',
                                 data: gewicht,
                                 tension: 0.2,
                             }
@@ -133,7 +132,7 @@
 
                 </script>
 
-                <x-button class="mt-11">
+                <x-button class="mt-11 bg-red-200 hover:bg-red-300">
                     <a href="/stats">
                         {{'Meer'}}
                     </a>

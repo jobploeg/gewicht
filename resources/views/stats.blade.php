@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="sm:px-6 lg:px-8 md:w-2/3 sm:ml-56 w-screen md:mt-10">
+        <div class="sm:px-6 lg:px-8 md:w-2/3 sm:ml-56 w-screen md:mt-10 mt-11 ">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <script>
