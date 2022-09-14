@@ -13,7 +13,7 @@ class LogController extends Controller
 {
     public function index()
     {
-        $logs = Log::all();
+        $logs = Auth::user()->logs;
 
         $gewicht = $logs->pluck('gewicht');
         $dates = $logs->pluck('toegevoegd');

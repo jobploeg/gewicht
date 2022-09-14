@@ -16,4 +16,8 @@ class Log extends Model
         'toegevoegd',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
